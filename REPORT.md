@@ -148,6 +148,9 @@
 ## 재현 방법
 
 ```bash
-python3 -m venv .venv && .venv/bin/pip install -r backend/requirements.txt matplotlib
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   # 버전 고정 목록
 .venv/bin/python scripts/analyze.py   # images/*.png 5장 재생성 + 인용 수치 출력
 ```
+
+Python 3.11 기준. 그래프의 한글은 저장소에 동봉된 Pretendard(`scripts/Pretendard.ttf`,
+SIL OFL 1.1 라이선스)로 렌더링되며, 없으면 기본 폰트로 대체된다.

@@ -1,0 +1,7 @@
+# 전체 의존성 (백엔드 + 분석 재현). 백엔드만 필요하면 backend/requirements.txt 를 쓴다.
+-r backend/requirements.txt
+
+# 분석·시각화 (scripts/analyze.py)
+matplotlib==3.11.1
+fonttools==4.63.0     # Pretendard woff2 → ttf 변환 (한글 그래프 라벨)
+brotli==1.2.0         # fonttools 의 woff2 해제 백엔드

@@ -89,7 +89,7 @@
 ## 로컬 실행
 
 ```bash
-python3 -m venv .venv && .venv/bin/pip install -r backend/requirements.txt
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp .env.example .env      # 키 채우기 (없으면 챗만 503, 나머지는 동작)
 set -a; source .env; set +a
 .venv/bin/uvicorn backend.main:app --reload
