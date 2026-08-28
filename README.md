@@ -18,6 +18,20 @@
   캔버스 차트(원계열+7일 이동평균) · CSV 내보내기 · 다크 모드)
 - **컨테이너**: Dockerfile + docker-compose (NAS 데모 배포)
 
+## 코드 구조 — 책임 분리
+
+| 파일 | 책임 |
+|---|---|
+| `backend/main.py` | 앱 조립만: CORS·라우터 등록·정적 서빙·시드 적재. 비즈니스 로직 없음 |
+| `backend/routers/*.py` | HTTP 계층: 요청을 받아 서비스를 부르고 상태코드를 결정. 계산·저장 로직 없음 |
+| `backend/summary.py` | 분석 서비스: 시계열 요약 계산과 프롬프트 문자열 생성. HTTP 를 모름 |
+| `backend/llm.py` | LLM 서비스: GPT 호출·도구 호출 루프. 저장소를 모름 (콜백으로 주입받음) |
+| `backend/store.py` | 저장 계층: Firestore/로컬 JSON 을 같은 인터페이스로. 상위 계층은 어느 쪽인지 모름 |
+| `backend/models.py` | 검증 계층: 모든 입력 검증은 Pydantic 스키마에서 끝낸다 |
+
+라우터는 서비스를 부르고, 서비스는 서로를 모른다 — 예: `routers/chat.py` 가
+`summary.compute_summary()` 와 `llm.chat()` 을 순서대로 부르는 조립자 역할만 한다.
+
 ## 데이터
 
 - **출처**: 자체 수집기 indiepulse (Steam 공식 리뷰 API를 매일 폴링, SQLite 저장).
@@ -54,6 +68,44 @@
 | GET | `/api/report.md` | 리포트 md 파일 다운로드 |
 | GET | `/api/health` | 상태 (저장소 종류·LLM 설정 여부) |
 
+### 요청/응답 예시
+
+`GET /api/data/summary` — 챗 프롬프트에 주입되는 요약. 서드파티 대시보드(예: Grafana JSON
+데이터소스)나 다른 클라이언트가 그대로 재사용할 수 있는 순수 JSON 이다:
+
+```json
+{
+  "period": "2026-02-08 ~ 2026-08-27",
+  "count": 180,
+  "metrics": {"total": 45844.0, "average": 254.69, "max": 2088.0, "min": 1.0, "stdev": 546.42},
+  "moving_average_7d": 1570.14,
+  "trend": "상승 (최근 14일 평균 +45.0%)",
+  "change_pct_14d": 45.0,
+  "peak": {"date": "2026-08-22", "value": 2088, "memo": "최다 리뷰: Brigador Killers · 긍정 85%"},
+  "weekday_average": {"월": 259.1, "화": 263.6, "수": 241.9, "목": 201.0, "금": 291.5, "토": 287.8, "일": 248.1},
+  "best_weekday": "금",
+  "weekday_seasonality_detrended": {"월": 22.2, "화": -79.6, "수": -105.1, "목": -32.9, "금": 87.5, "토": 117.5, "일": 56.1}
+}
+```
+
+`POST /api/data` — 요청과 응답 (검증 실패 시 422 + 필드별 사유):
+
+```json
+// 요청
+{"date": "2026-08-28", "value": 123, "memo": "테스트"}
+// 응답 201
+{"id": "7f85fc002c7a", "date": "2026-08-28", "value": 123.0, "memo": "테스트"}
+```
+
+`POST /api/chat` — 요청과 응답 (키 미설정 시 503 + 안내 문구):
+
+```json
+// 요청
+{"message": "최근 리뷰 추세가 어때?", "conversation_id": null, "history": []}
+// 응답 200
+{"reply": "최근 리뷰 추세는 상승입니다. 최근 14일 평균이 +45.0% …", "conversation_id": "b0b9adf47585", "used_tools": []}
+```
+
 ## 챗 동작 흐름 (컨텍스트 주입 + 도구 호출)
 
 ```
@@ -66,11 +118,35 @@
 도구 호출 근거는 응답의 `used_tools` 로 확인할 수 있고 프론트 하단에 표시된다.
 (게이트웨이가 `tool_choice` 강제를 지원하지 않아 도구는 "제시"만 한다 — 호출 여부는 모델 판단.)
 
+**컨텍스트 주입의 장단점** — 장점: 매 대화가 최신 데이터 요약을 반영하므로 모델이 "내 상황"의
+실제 수치로 답하고, 원본 전체를 보내지 않아 토큰이 싸다. 단점: 요약에 없는 수치를 물으면
+모델이 지어낼 위험이 있고(그래서 `get_recent_data` 도구로 원본 조회 경로를 열어 뒀다),
+요약이 두 지표를 주면 모델이 그럴듯한 쪽에 앵커링한다 — 실제로 원시 요일 평균으로 리포트와
+다른 답을 내는 것이 관측돼, 프롬프트에 결론(최저/최다 요일)까지 계산해 넣어 고쳤다.
+**주입된 요약은 신뢰 경계 안의 데이터로 취급되므로, 사용자 입력이 요약에 섞이지 않게
+요약은 서버가 계산한 값만으로 만든다.**
+
+### 화면 시나리오 순서도 (데이터 관리 → 채팅 → 불러오기)
+
+```
+[데이터 관리] 추가/수정/삭제 ──▶ POST·PUT·DELETE /api/data
+        │                              │
+        ▼                              ▼
+  목록·차트·요약 갱신 ◀────── GET /api/data, /api/data/summary
+        │
+[AI 채팅] 질문 입력 ──▶ POST /api/chat ─▶ 요약 주입 ─▶ GPT ─▶ 응답 표시
+        │                                              └▶ conversations 자동 저장
+        ▼
+[대화 기록] 목록 클릭 ──▶ GET /api/conversations/{id} ─▶ 채팅창에 메시지 복원
+                                                        (이어서 질문하면 같은 대화에 누적)
+```
+
 ## 배포 URL
 
 - **백엔드 API (Render)**: https://ai-data-assistant-3srn.onrender.com
 - **Swagger**: https://ai-data-assistant-3srn.onrender.com/docs
-- **프론트/대시보드**: 같은 URL에서 서빙 (Vercel 분리 배포 시 vercel.app 도메인 추가)
+- **프론트 (Vercel)**: https://ai-data-assistant-coral.vercel.app — 백엔드와 분리 배포된 정적 프론트.
+  (백엔드 URL 에서도 같은 화면이 서빙되지만, 제출·공유용 프론트 주소는 이쪽)
 - **저장소**: https://github.com/doji-kr/ai-data-assistant
 - ⚠️ Render 무료 티어는 15분 무접속 시 슬립 — 첫 요청이 30초+ 걸릴 수 있다.
   프론트의 "생각 중…" 로딩 표시가 그 대기를 안내한다
@@ -114,6 +190,34 @@ docker compose up -d --build
 | `FIREBASE_SERVICE_ACCOUNT_JSON` | 서비스 계정 JSON 경로 또는 문자열. 비우면 로컬 JSON 저장소 |
 | `ALLOWED_ORIGINS` | CORS 허용 도메인 (콤마 구분, 기본 `*`) |
 
+## 설계 노트
+
+- **컬렉션 구조 선택 근거**: `conversations` 는 messages 배열을 문서 안에 **중첩**했다 —
+  이 앱의 유일한 접근 패턴이 "대화 단위 통째 조회"이고, Firestore 는 조인이 없어 메시지를
+  별도 컬렉션으로 정규화하면 대화 하나 열 때마다 N+1 조회가 되기 때문이다. 대가는 문서당
+  1MB 상한인데, 대화당 메시지 40개 제한(models.py)이 그 안쪽에서 막아 준다. `data` 는
+  포인트당 문서 1개 — CRUD 단위가 포인트 하나라서다.
+- **대화 보존 정책**: 현재는 무기한 보존 + 수동 삭제(UI/DELETE API)다. 운영으로 간다면
+  "90일 초과 & 미열람 대화 자동 삭제" 같은 기준을 Cloud Scheduler + created_at 쿼리로 거는
+  것을 권장한다. 인덱스는 기본(단일 필드 created_at)으로 충분한 규모다.
+- **비밀 취급**: 서비스 계정은 **Firestore 권한만 가진 최소 역할**로 발급하고(프로젝트
+  Owner 키 금지), 저장은 환경변수/시크릿 매니저로만 — 이 저장소는 `.env`·`serviceAccount*.json`
+  을 gitignore 로 차단한다. 키가 노출되면 재발급(로테이션)이 유일한 회수 수단이다.
+- **`ALLOWED_ORIGINS` 설정 예시**:
+  - 로컬 개발: `*` (편의 — 신용 정보가 없는 개발 데이터 전제)
+  - 운영: `https://ai-data-assistant-coral.vercel.app` 처럼 **정확한 오리진만**. 여러 개는
+    콤마로: `https://a.vercel.app,https://b.example.com`. 와일드카드 `*` 를 운영에 두면
+    아무 사이트나 이 API 를 대신 호출할 수 있다 — credentials 를 켜는 순간 특히 위험하다.
+- **입력 방어**: 길이 상한(질문 4,000자·메모 500자·메시지 8,000자)과 role 패턴 검증은
+  Pydantic 에서 끝난다. 추가 권장: 제어문자 스트립, 프롬프트 주입 의심 문자열(예: "ignore
+  previous instructions")의 로깅 — 챗 출력은 텍스트로만 렌더링하므로(innerText) XSS 경로는 없다.
+- **콜드스타트 안내(프론트 문구 제안)**: 첫 응답이 늦을 때 로딩 표시("생각 중…") 옆에
+  *"무료 서버가 잠들어 있었어요 — 첫 응답은 30초쯤 걸릴 수 있습니다"* 를 띄우는 것을 권장.
+- **요약 기준 바꾸기**: [backend/summary.py](backend/summary.py) 상단 상수 4개만 고치면 된다 —
+  `MA_WINDOW`(이동평균 창, 기본 7) · `TREND_WINDOW`(추세 비교 창, 기본 14) ·
+  `TREND_THRESHOLD_PCT`(상승/하락 문턱, 기본 10) · `SEASONALITY_WINDOW`(계절성 창, 기본 56).
+  예: "최근 30일 기준 추세"로 바꾸려면 `TREND_WINDOW = 30`.
+
 ## 배포 (Render / Vercel)
 
 - **Render(백엔드)**: 이 저장소를 GitHub 에 푸시 → Web Service 생성 →
@@ -122,6 +226,22 @@ docker compose up -d --build
   무료 티어는 슬립 후 첫 요청이 30초+ 걸릴 수 있다 — 프론트 로딩 표시("생각 중…")가 그 대기를 안내한다.
 - **Vercel(프론트)**: `frontend/` 를 정적 배포하고 `index.html` 의 `window.API_BASE_URL` 에
   Render 백엔드 URL 을 넣는다 (또는 빌드 환경변수로 치환).
+
+## 제출 스크린샷
+
+> ⚠️ 아래 4장은 배포 URL 을 열어 캡처한 뒤 `images/screenshots/` 에 **아래 파일명 그대로**
+> 저장하고 커밋하면 자동으로 표시된다 (푸시 = Render 재배포).
+> ① https://ai-data-assistant-3srn.onrender.com/docs 화면 → `swagger.png`
+> ② 데이터 관리에서 한 건 추가 직후(목록 갱신이 보이게) → `crud.png`
+> ③ 요약 카드 + 질문/답변이 보이는 채팅 → `chat.png`
+> ④ 대화 기록에서 이전 대화를 불러온 화면 → `conversations.png`
+> ⑤ (모바일 대응 증빙) 폰에서 채팅·데이터 추가·불러오기 중 한 장면 → `mobile.png`
+
+![Swagger UI](images/screenshots/swagger.png)
+![데이터 추가 후 목록 갱신](images/screenshots/crud.png)
+![요약이 보이는 채팅 화면](images/screenshots/chat.png)
+![대화 불러오기](images/screenshots/conversations.png)
+![모바일 화면](images/screenshots/mobile.png)
 
 ## 과제 목표 답변 — 스스로 설명할 수 있어야 하는 것들
 

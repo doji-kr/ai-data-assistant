@@ -12,6 +12,12 @@ import statistics
 
 WEEKDAYS = ["월", "화", "수", "목", "금", "토", "일"]
 
+# 요약 창 크기 — 기준을 바꾸려면 여기만 고친다 (README "요약 기준 바꾸기" 참조)
+MA_WINDOW = 7            # 이동평균 창(일). 7의 배수가 요일 편향을 상쇄한다
+TREND_WINDOW = 14        # 추세 판정: 최근 N일 vs 직전 N일 평균 비교
+TREND_THRESHOLD_PCT = 10  # 이 % 를 넘으면 상승/하락, 안이면 유지
+SEASONALITY_WINDOW = 56  # 요일 계절성 계산 창(일). 먼 과거가 편차를 희석하지 않게 최근 8주
+
 
 def compute_summary(rows: list[dict]) -> dict:
     if not rows:
@@ -30,12 +36,11 @@ def compute_summary(rows: list[dict]) -> dict:
     }
     peak = max(rows, key=lambda r: float(r["value"]))
 
-    # 7일 이동평균 (마지막 값)
-    tail7 = values[-7:]
-    ma7 = round(statistics.mean(tail7), 2)
+    # 이동평균 (마지막 값)
+    ma7 = round(statistics.mean(values[-MA_WINDOW:]), 2)
 
-    # 구간 비교: 최근 14일 vs 직전 14일
-    recent, prev = values[-14:], values[-28:-14]
+    # 구간 비교: 최근 TREND_WINDOW 일 vs 직전 TREND_WINDOW 일
+    recent, prev = values[-TREND_WINDOW:], values[-TREND_WINDOW * 2:-TREND_WINDOW]
     trend = "판정 불가 (구간 부족)"
     change_pct = None
     if prev:
@@ -43,9 +48,9 @@ def compute_summary(rows: list[dict]) -> dict:
         change_pct = round((b - a) / a * 100, 1) if a else None
         if change_pct is None:
             trend = "판정 불가"
-        elif change_pct > 10:
+        elif change_pct > TREND_THRESHOLD_PCT:
             trend = f"상승 (최근 14일 평균 {change_pct:+}%)"
-        elif change_pct < -10:
+        elif change_pct < -TREND_THRESHOLD_PCT:
             trend = f"하락 (최근 14일 평균 {change_pct:+}%)"
         else:
             trend = f"유지 (최근 14일 평균 {change_pct:+}%)"
@@ -66,7 +71,7 @@ def compute_summary(rows: list[dict]) -> dict:
     # 창은 최근 8주(56일)로 제한한다 — 먼 과거 구간(수집 개시 전 등)이 편차를 희석하지 않게.
     seasonality = None
     if len(values) >= 28:
-        w_rows, w_vals = rows[-56:], values[-56:]
+        w_rows, w_vals = rows[-SEASONALITY_WINDOW:], values[-SEASONALITY_WINDOW:]
         pool: dict[int, list[float]] = {}
         for i in range(3, len(w_rows) - 3):
             t = statistics.mean(w_vals[i - 3: i + 4])
