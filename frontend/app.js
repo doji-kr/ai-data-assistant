@@ -125,8 +125,11 @@ function mdToHtml(md) {
   const inline = (s) =>
     esc(s)
       .replace(/`([^`]+)`/g, "<code>$1</code>")
-      .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, '<img alt="$1" src="$2">')
-      .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+      .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (_, alt, src) =>
+        `<img alt="${alt}" src="${/^https?:/.test(src) ? src : API + "/" + src}">`)
+      .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, t, href) =>
+        `<a href="${/^https?:/.test(href) ? href
+          : "https://github.com/doji-kr/ai-data-assistant/blob/main/" + href}" target="_blank">${t}</a>`)
       .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   const out = [];
   const lines = md.split("\n");
