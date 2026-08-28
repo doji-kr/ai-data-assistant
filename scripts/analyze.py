@@ -92,6 +92,77 @@ ax.set_ylabel("건")
 fig.tight_layout()
 fig.savefig("images/03_weekday.png", dpi=110)
 
+# ── 그림 4: 시계열 분해 (안정 구간, 가법 모형) ─────────────────────
+# 관측 개시 효과가 섞인 전 기간 대신 수집이 안정된 2026-07-19 이후만 분해한다.
+# 트렌드 = 중심 7일 이동평균 · 계절성 = 요일별 (값-트렌드) 평균 · 잔차 = 나머지
+STABLE = date(2026, 7, 19)
+# 마지막 날은 수집이 하루치를 다 못 담은 부분 관측이라 분해·예측에서 뺀다 (리포트 3절)
+sd = [(d, v) for d, v in zip(dates[:-1], vals[:-1]) if d >= STABLE]
+s_dates = [d for d, _ in sd]
+s_vals = [v for _, v in sd]
+
+trend = [None] * len(s_vals)
+for i in range(3, len(s_vals) - 3):
+    trend[i] = statistics.mean(s_vals[i - 3: i + 4])
+season_pool = {i: [] for i in range(7)}
+for d, v, t in zip(s_dates, s_vals, trend):
+    if t is not None:
+        season_pool[d.weekday()].append(v - t)
+seasonal_by_wd = {k: (statistics.mean(v) if v else 0.0) for k, v in season_pool.items()}
+seasonal = [seasonal_by_wd[d.weekday()] for d in s_dates]
+resid = [v - t - s if t is not None else None
+         for v, t, s in zip(s_vals, trend, seasonal)]
+
+fig, axes = plt.subplots(4, 1, figsize=(10, 8), sharex=True)
+axes[0].plot(s_dates, s_vals, lw=1)
+axes[0].set_ylabel("원계열")
+axes[0].set_title("시계열 분해 — 안정 구간(2026-07-19~) · 가법 모형")
+axes[1].plot(s_dates, trend, lw=2, color="#e0730f")
+axes[1].set_ylabel("트렌드")
+axes[2].plot(s_dates, seasonal, lw=1, color="#48a")
+axes[2].set_ylabel("계절성(요일)")
+axes[3].plot(s_dates, resid, lw=0.8, color="gray")
+axes[3].axhline(0, color="black", lw=0.5)
+axes[3].set_ylabel("잔차")
+fig.tight_layout()
+fig.savefig("images/04_decomposition.png", dpi=110)
+
+# ── 그림 5: 베이스라인 예측 (백테스트 + 향후 7일) ──────────────────
+# 방법: 예측 = 최근 7일 트레일링 평균(수준) + 요일 계절성. 대조군: naive(마지막 값 유지).
+# 백테스트: 마지막 7일을 떼어내고, 그 이전 데이터만으로 같은 방법을 적용해 MAE 비교.
+def forecast(train_dates, train_vals, horizon_dates):
+    level = statistics.mean(train_vals[-7:])
+    t7 = [None] * len(train_vals)
+    for i in range(3, len(train_vals) - 3):
+        t7[i] = statistics.mean(train_vals[i - 3: i + 4])
+    pool = {i: [] for i in range(7)}
+    for d, v, t in zip(train_dates, train_vals, t7):
+        if t is not None:
+            pool[d.weekday()].append(v - t)
+    sea = {k: (statistics.mean(v) if v else 0.0) for k, v in pool.items()}
+    return [max(0.0, level + sea[d.weekday()]) for d in horizon_dates]
+
+hold_d, hold_v = s_dates[-7:], s_vals[-7:]
+bt = forecast(s_dates[:-7], s_vals[:-7], hold_d)
+mae_model = statistics.mean(abs(a - b) for a, b in zip(bt, hold_v))
+mae_naive = statistics.mean(abs(s_vals[-8] - b) for b in hold_v)
+
+from datetime import timedelta
+future_d = [s_dates[-1] + timedelta(days=i) for i in range(1, 8)]
+future_v = forecast(s_dates, s_vals, future_d)
+
+fig, ax = plt.subplots(figsize=(10, 4))
+ax.plot(s_dates[-28:], s_vals[-28:], lw=1.2, label="실측")
+ax.plot(hold_d, bt, "o--", lw=1.5, color="#48a",
+        label=f"백테스트 예측 (MAE {mae_model:.0f}건)")
+ax.plot(future_d, future_v, "s--", lw=1.5, color="#e0730f", label="향후 7일 예측")
+ax.axvline(s_dates[-1], color="gray", lw=0.7, ls=":")
+ax.set_title("베이스라인 예측 — 수준(7일 평균) + 요일 계절성")
+ax.set_ylabel("건")
+ax.legend()
+fig.tight_layout()
+fig.savefig("images/05_forecast.png", dpi=110)
+
 # ── 리포트 인용 수치 ───────────────────────────────────────────────
 half = len(vals) // 2
 print(f"기간 {dates[0]} ~ {dates[-1]} · {len(vals)}일 · 합계 {sum(vals):.0f}건")
@@ -102,4 +173,7 @@ print(f"최근 14일 평균 {statistics.mean(vals[-14:]):.1f} vs 직전 14일 {s
 top_weeks = sorted(zip(wlab, wsum), key=lambda t: -t[1])[:3]
 print("주간 합계 상위:", top_weeks)
 print("요일 평균:", {w: round(a, 1) for w, a in zip(WEEKDAYS, avg)})
-sys.stderr.write("images/*.png 3장 저장 완료\n")
+print("분해 계절성(요일별 편차):", {WEEKDAYS[k]: round(v, 1) for k, v in seasonal_by_wd.items()})
+print(f"백테스트 MAE — 모델 {mae_model:.0f}건 vs naive {mae_naive:.0f}건")
+print("향후 7일 예측:", [(d.isoformat(), round(v)) for d, v in zip(future_d, future_v)])
+sys.stderr.write("images/*.png 5장 저장 완료\n")

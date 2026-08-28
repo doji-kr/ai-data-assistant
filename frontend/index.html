@@ -20,6 +20,17 @@
   <section id="summary-card" class="card">
     <h2>데이터 요약</h2>
     <div id="summary-body">불러오는 중…</div>
+    <div class="row" id="chart-controls">
+      <span class="ctl-group" data-key="range">
+        <button class="ghost" data-v="all">전체</button>
+        <button class="ghost" data-v="90">최근 90일</button>
+        <button class="ghost" data-v="30">최근 30일</button>
+      </span>
+      <span class="ctl-group" data-key="unit">
+        <button class="ghost" data-v="day">일</button>
+        <button class="ghost" data-v="week">주</button>
+      </span>
+    </div>
     <canvas id="chart" width="820" height="220"></canvas>
     <div class="row">
       <button id="export-csv">CSV 내보내기</button>

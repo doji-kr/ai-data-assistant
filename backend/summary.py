@@ -61,6 +61,22 @@ def compute_summary(rows: list[dict]) -> dict:
     weekday_avg = {WEEKDAYS[k]: round(statistics.mean(v), 1) for k, v in sorted(by_wd.items())}
     best_wd = max(weekday_avg, key=weekday_avg.get) if weekday_avg else None
 
+    # 트렌드 제거 계절성: 중심 7일 이동평균을 빼고 요일별 편차를 본다.
+    # 원시 요일 평균은 상승/하락 트렌드에 교란되므로(리포트 4-4) 이 값을 함께 준다.
+    # 창은 최근 8주(56일)로 제한한다 — 먼 과거 구간(수집 개시 전 등)이 편차를 희석하지 않게.
+    seasonality = None
+    if len(values) >= 28:
+        w_rows, w_vals = rows[-56:], values[-56:]
+        pool: dict[int, list[float]] = {}
+        for i in range(3, len(w_rows) - 3):
+            t = statistics.mean(w_vals[i - 3: i + 4])
+            try:
+                wd = dt.date.fromisoformat(w_rows[i]["date"]).weekday()
+            except ValueError:
+                continue
+            pool.setdefault(wd, []).append(w_vals[i] - t)
+        seasonality = {WEEKDAYS[k]: round(statistics.mean(v), 1) for k, v in sorted(pool.items()) if v}
+
     return {
         "period": f"{rows[0]['date']} ~ {rows[-1]['date']}",
         "count": len(rows),
@@ -71,6 +87,7 @@ def compute_summary(rows: list[dict]) -> dict:
         "peak": {"date": peak["date"], "value": peak["value"], "memo": peak.get("memo")},
         "weekday_average": weekday_avg,
         "best_weekday": best_wd,
+        "weekday_seasonality_detrended": seasonality,
     }
 
 
@@ -86,5 +103,17 @@ def summary_to_prompt(s: dict) -> str:
         f"- 최고점: {s['peak']['date']} {s['peak']['value']}건 ({s['peak'].get('memo') or ''})\n"
         f"- 최근 7일 이동평균: {s['moving_average_7d']}건\n"
         f"- 추세: {s['trend']}\n"
-        f"- 요일별 평균: {s['weekday_average']} (최다 요일: {s['best_weekday']})"
+        f"- 요일별 평균(원시, 트렌드에 교란된 값): {s['weekday_average']}"
+        + _seasonality_lines(s.get("weekday_seasonality_detrended"))
+    )
+
+
+def _seasonality_lines(sea: dict | None) -> str:
+    if not sea:
+        return ""
+    lo, hi = min(sea, key=sea.get), max(sea, key=sea.get)
+    return (
+        f"\n- 요일별 계절성(트렌드 제거 편차, 최근 8주): {sea}\n"
+        f"- ★ 요일 비교 질문에는 계절성 기준으로 답할 것 — "
+        f"가장 적은 요일: {lo}({sea[lo]}) · 가장 많은 요일: {hi}(+{sea[hi]})"
     )

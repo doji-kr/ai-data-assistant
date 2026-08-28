@@ -41,6 +41,8 @@ button.ghost { background: transparent; color: var(--muted); border: 1px solid v
 .stat b { display: block; font-size: 17px; font-variant-numeric: tabular-nums; }
 .stat span { color: var(--muted); font-size: 12px; }
 canvas { width: 100%; height: auto; margin-top: 12px; }
+.ctl-group { display: inline-flex; gap: 4px; }
+.ctl-group button.active { background: var(--accent); color: #fff; border-color: transparent; }
 .table-wrap { max-height: 300px; overflow-y: auto; margin-top: 10px; }
 table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); font-size: 13px; }

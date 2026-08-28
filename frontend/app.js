@@ -40,12 +40,39 @@ async function loadSummary() {
     <div class="stat"><b>${s.trend}</b><span>추세 · 최다 요일 ${s.best_weekday}</span></div>`;
 }
 
+let chartRows = [];
+const chartOpt = { range: "all", unit: "day" };
+
 async function loadChart() {
-  const rows = await api("/api/data");
-  drawChart($("#chart"), rows.map((r) => ({ x: r.date, y: Number(r.value) })));
+  chartRows = await api("/api/data");
+  renderChart();
 }
 
-function drawChart(canvas, pts) {
+function renderChart() {
+  let pts = chartRows.map((r) => ({ x: r.date, y: Number(r.value) }));
+  if (chartOpt.range !== "all") pts = pts.slice(-Number(chartOpt.range));
+  if (chartOpt.unit === "week") {
+    const weeks = new Map(); // ISO 주 시작일(월요일) → 합계
+    for (const p of pts) {
+      const d = new Date(p.x + "T00:00:00Z");
+      d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7));
+      const k = d.toISOString().slice(0, 10);
+      weeks.set(k, (weeks.get(k) || 0) + p.y);
+    }
+    pts = [...weeks].map(([x, y]) => ({ x, y }));
+  }
+  drawChart($("#chart"), pts, chartOpt.unit === "week" ? 1 : 7);
+}
+
+document.querySelectorAll("#chart-controls .ctl-group").forEach((g) => {
+  const key = g.dataset.key;
+  const btns = g.querySelectorAll("button");
+  const sync = () => btns.forEach((b) => b.classList.toggle("active", b.dataset.v === chartOpt[key]));
+  btns.forEach((b) => (b.onclick = () => { chartOpt[key] = b.dataset.v; sync(); renderChart(); }));
+  sync();
+});
+
+function drawChart(canvas, pts, maWindow = 7) {
   const ctx = canvas.getContext("2d");
   const W = canvas.width, H = canvas.height, P = 34;
   ctx.clearRect(0, 0, W, H);
@@ -66,10 +93,10 @@ function drawChart(canvas, pts) {
   ctx.globalAlpha = 0.45; ctx.beginPath();
   pts.forEach((p, i) => (i ? ctx.lineTo(x(i), y(p.y)) : ctx.moveTo(x(i), y(p.y))));
   ctx.stroke(); ctx.globalAlpha = 1;
-  // 7일 이동평균
+  // 이동평균 (일 단위 7일 / 주 단위는 원계열 그대로)
   ctx.lineWidth = 2; ctx.beginPath();
   pts.forEach((p, i) => {
-    const w = pts.slice(Math.max(0, i - 6), i + 1);
+    const w = pts.slice(Math.max(0, i - maWindow + 1), i + 1);
     const v = w.reduce((a, q) => a + q.y, 0) / w.length;
     i ? ctx.lineTo(x(i), y(v)) : ctx.moveTo(x(i), y(v));
   });
