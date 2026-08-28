@@ -66,6 +66,15 @@
 도구 호출 근거는 응답의 `used_tools` 로 확인할 수 있고 프론트 하단에 표시된다.
 (게이트웨이가 `tool_choice` 강제를 지원하지 않아 도구는 "제시"만 한다 — 호출 여부는 모델 판단.)
 
+## 배포 URL
+
+- **백엔드 API (Render)**: https://ai-data-assistant-3srn.onrender.com
+- **Swagger**: https://ai-data-assistant-3srn.onrender.com/docs
+- **프론트/대시보드**: 같은 URL에서 서빙 (Vercel 분리 배포 시 vercel.app 도메인 추가)
+- **저장소**: https://github.com/doji-kr/ai-data-assistant
+- ⚠️ Render 무료 티어는 15분 무접속 시 슬립 — 첫 요청이 30초+ 걸릴 수 있다.
+  프론트의 "생각 중…" 로딩 표시가 그 대기를 안내한다
+
 ## 대시보드 탐색 (분석 결과 서비스화)
 
 메인 화면의 차트에서 **기간(전체/최근 90일/최근 30일)**과 **집계 단위(일/주)**를 바꿔가며

@@ -6,8 +6,11 @@
 <title>나만의 AI 비서 — 인디게임 리뷰 시계열</title>
 <link rel="stylesheet" href="style.css">
 <script>
-  // Vercel 등 분리 배포 시 백엔드 주소. 같은 오리진에서 서빙되면 빈 값 그대로 둔다.
-  window.API_BASE_URL = window.API_BASE_URL || "";
+  // 백엔드 주소: Vercel(정적 분리 배포)에서 열리면 Render 백엔드,
+  // NAS/Render처럼 백엔드가 직접 서빙하면 같은 오리진("").
+  window.API_BASE_URL = window.API_BASE_URL ||
+    (location.hostname.endsWith(".vercel.app")
+      ? "https://ai-data-assistant-3srn.onrender.com" : "");
 </script>
 </head>
 <body>
