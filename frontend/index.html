@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나만의 AI 비서 — 인디게임 리뷰 시계열</title>
+<link rel="stylesheet" href="style.css">
+<script>
+  // Vercel 등 분리 배포 시 백엔드 주소. 같은 오리진에서 서빙되면 빈 값 그대로 둔다.
+  window.API_BASE_URL = window.API_BASE_URL || "";
+</script>
+</head>
+<body>
+<header>
+  <h1>🎮 나만의 AI 비서 <span class="sub">스팀 인디게임 일일 리뷰 시계열</span></h1>
+  <button id="theme-toggle" title="다크 모드">🌙</button>
+</header>
+
+<main>
+  <section id="summary-card" class="card">
+    <h2>데이터 요약</h2>
+    <div id="summary-body">불러오는 중…</div>
+    <canvas id="chart" width="820" height="220"></canvas>
+    <div class="row">
+      <button id="export-csv">CSV 내보내기</button>
+    </div>
+  </section>
+
+  <section class="card" id="chat-card">
+    <h2>AI 채팅</h2>
+    <div id="chat-log" aria-live="polite"></div>
+    <form id="chat-form" class="row">
+      <input id="chat-input" placeholder="예: 최근 리뷰 추세가 어때?" autocomplete="off" required>
+      <button type="submit" id="chat-send">보내기</button>
+    </form>
+    <div id="chat-status"></div>
+  </section>
+
+  <section class="card">
+    <h2>대화 기록</h2>
+    <ul id="conv-list"></ul>
+  </section>
+
+  <section class="card">
+    <h2>데이터 관리</h2>
+    <form id="data-form" class="row">
+      <input id="d-date" type="date" required>
+      <input id="d-value" type="number" step="any" placeholder="값" required>
+      <input id="d-memo" placeholder="메모 (선택)">
+      <button type="submit">추가</button>
+    </form>
+    <div class="table-wrap">
+      <table id="data-table">
+        <thead><tr><th>날짜</th><th>값</th><th>메모</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

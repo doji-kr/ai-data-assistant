@@ -1,0 +1,14 @@
+services:
+  ai-assistant:
+    build: .
+    image: jitendo/ai-data-assistant:local
+    container_name: ai-data-assistant
+    restart: unless-stopped
+    cpu_shares: 512
+    mem_limit: "256m"
+    ports:
+      - "3030:8000"
+    env_file:
+      - .env            # OPENAI_API_KEY 등 — 저장소에는 없다(.env.example 참고)
+    volumes:
+      - ./var:/app/var  # 로컬 저장소(db.json) 영속화

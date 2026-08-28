@@ -1,0 +1,905 @@
+{
+ "data": {
+  "31b5bd58edf5": {
+   "date": "2026-02-08",
+   "value": 2,
+   "memo": "최다 리뷰: NET.CRAWL · 긍정 50%"
+  },
+  "63f82128e097": {
+   "date": "2026-02-09",
+   "value": 1,
+   "memo": "최다 리뷰: Slot & Dungeons · 긍정 100%"
+  },
+  "c67b515e098e": {
+   "date": "2026-02-12",
+   "value": 1,
+   "memo": "최다 리뷰: A Game of D.I.C.E. · 긍정 0%"
+  },
+  "f4ce00449edd": {
+   "date": "2026-02-13",
+   "value": 3,
+   "memo": "최다 리뷰: 10-Man Idle · 긍정 100%"
+  },
+  "f98b798ae008": {
+   "date": "2026-02-15",
+   "value": 1,
+   "memo": "최다 리뷰: AI Learns To Drive · 긍정 100%"
+  },
+  "93da893d0554": {
+   "date": "2026-02-20",
+   "value": 3,
+   "memo": "최다 리뷰: AfterWar · 긍정 100%"
+  },
+  "f7c5e1dcb84c": {
+   "date": "2026-02-21",
+   "value": 3,
+   "memo": "최다 리뷰: The Dream Office · 긍정 100%"
+  },
+  "0545b473ca7b": {
+   "date": "2026-02-22",
+   "value": 2,
+   "memo": "최다 리뷰: The Dream Office · 긍정 100%"
+  },
+  "e68514a4ffa3": {
+   "date": "2026-02-23",
+   "value": 1,
+   "memo": "최다 리뷰: Little Sim World · 긍정 0%"
+  },
+  "62bcf4adf02d": {
+   "date": "2026-02-26",
+   "value": 6,
+   "memo": "최다 리뷰: Cyber Farmer · 긍정 50%"
+  },
+  "18600ceb38ff": {
+   "date": "2026-02-27",
+   "value": 6,
+   "memo": "최다 리뷰: Escape from Junglekov · 긍정 67%"
+  },
+  "da756f076648": {
+   "date": "2026-02-28",
+   "value": 2,
+   "memo": "최다 리뷰: Purrrifiers: Cleaning Chaos (Play for Free with Friend's Pass) · 긍정 0%"
+  },
+  "812ca952510f": {
+   "date": "2026-03-01",
+   "value": 3,
+   "memo": "최다 리뷰: Cyber Farmer · 긍정 100%"
+  },
+  "bd6a14d67fe3": {
+   "date": "2026-03-02",
+   "value": 2,
+   "memo": "최다 리뷰: Purrrifiers: Cleaning Chaos (Play for Free with Friend's Pass) · 긍정 50%"
+  },
+  "b3bd94716bb6": {
+   "date": "2026-03-03",
+   "value": 5,
+   "memo": "최다 리뷰: Nightmare Frontier · 긍정 80%"
+  },
+  "f0997055ab31": {
+   "date": "2026-03-04",
+   "value": 3,
+   "memo": "최다 리뷰: The Dream Office · 긍정 67%"
+  },
+  "4b65cbddf60e": {
+   "date": "2026-03-05",
+   "value": 1,
+   "memo": "최다 리뷰: Cyber Farmer · 긍정 0%"
+  },
+  "6d977285261f": {
+   "date": "2026-03-06",
+   "value": 4,
+   "memo": "최다 리뷰: Edge of Destruction · 긍정 75%"
+  },
+  "6c3bdbc4ab93": {
+   "date": "2026-03-07",
+   "value": 6,
+   "memo": "최다 리뷰: Buster Breaks Out · 긍정 100%"
+  },
+  "cbdb64ba449c": {
+   "date": "2026-03-08",
+   "value": 5,
+   "memo": "최다 리뷰: Buster Breaks Out · 긍정 60%"
+  },
+  "157e409bb7d6": {
+   "date": "2026-03-09",
+   "value": 4,
+   "memo": "최다 리뷰: Buster Breaks Out · 긍정 100%"
+  },
+  "acb743b92654": {
+   "date": "2026-03-10",
+   "value": 3,
+   "memo": "최다 리뷰: The Dream Office · 긍정 100%"
+  },
+  "bf44c6657b0d": {
+   "date": "2026-03-11",
+   "value": 3,
+   "memo": "최다 리뷰: Edge of Destruction · 긍정 100%"
+  },
+  "bdfadf20b415": {
+   "date": "2026-03-12",
+   "value": 4,
+   "memo": "최다 리뷰: The Dream Office · 긍정 100%"
+  },
+  "9e94f14079a3": {
+   "date": "2026-03-13",
+   "value": 2,
+   "memo": "최다 리뷰: Little Sim World · 긍정 100%"
+  },
+  "d6602e8f67c0": {
+   "date": "2026-03-14",
+   "value": 9,
+   "memo": "최다 리뷰: FixForce · 긍정 100%"
+  },
+  "c4d4b4b421d2": {
+   "date": "2026-03-15",
+   "value": 3,
+   "memo": "최다 리뷰: FixForce · 긍정 100%"
+  },
+  "6d29879d9649": {
+   "date": "2026-03-16",
+   "value": 7,
+   "memo": "최다 리뷰: Buster Breaks Out · 긍정 86%"
+  },
+  "cccc0fd64d9c": {
+   "date": "2026-03-17",
+   "value": 1,
+   "memo": "최다 리뷰: Buster Breaks Out · 긍정 100%"
+  },
+  "333daf68ade9": {
+   "date": "2026-03-18",
+   "value": 1,
+   "memo": "최다 리뷰: Little Sim World · 긍정 100%"
+  },
+  "931ce88038dd": {
+   "date": "2026-03-19",
+   "value": 1,
+   "memo": "최다 리뷰: Little Sim World · 긍정 100%"
+  },
+  "62b297c366c7": {
+   "date": "2026-03-20",
+   "value": 1,
+   "memo": "최다 리뷰: Fire On Fight : Online Multiplayer Shooter · 긍정 100%"
+  },
+  "2ae927f752e3": {
+   "date": "2026-03-21",
+   "value": 4,
+   "memo": "최다 리뷰: FixForce · 긍정 100%"
+  },
+  "d96fbfb43c53": {
+   "date": "2026-03-22",
+   "value": 6,
+   "memo": "최다 리뷰: FixForce · 긍정 100%"
+  },
+  "a07f94854638": {
+   "date": "2026-03-23",
+   "value": 10,
+   "memo": "최다 리뷰: Project: AFTERSHOCK · 긍정 90%"
+  },
+  "7602ef7dc8d7": {
+   "date": "2026-03-24",
+   "value": 5,
+   "memo": "최다 리뷰: FixForce · 긍정 80%"
+  },
+  "0f3cfae6e74c": {
+   "date": "2026-03-25",
+   "value": 3,
+   "memo": "최다 리뷰: Cyber Farmer · 긍정 100%"
+  },
+  "f20fc6b976dd": {
+   "date": "2026-03-26",
+   "value": 1,
+   "memo": "최다 리뷰: FixForce · 긍정 100%"
+  },
+  "306eaa9f42a5": {
+   "date": "2026-03-28",
+   "value": 3,
+   "memo": "최다 리뷰: Gensei Suikoden Plus · 긍정 67%"
+  },
+  "eff14875b170": {
+   "date": "2026-03-29",
+   "value": 3,
+   "memo": "최다 리뷰: CHEATED · 긍정 100%"
+  },
+  "0f6d3acad848": {
+   "date": "2026-03-30",
+   "value": 3,
+   "memo": "최다 리뷰: Nerd Simulator · 긍정 67%"
+  },
+  "91926e25b69e": {
+   "date": "2026-03-31",
+   "value": 1,
+   "memo": "최다 리뷰: Gensei Suikoden Plus · 긍정 100%"
+  },
+  "2e5f5f5cbf64": {
+   "date": "2026-04-01",
+   "value": 4,
+   "memo": "최다 리뷰: FixForce · 긍정 75%"
+  },
+  "1bda88dbc752": {
+   "date": "2026-04-02",
+   "value": 1,
+   "memo": "최다 리뷰: Nightmare Frontier · 긍정 100%"
+  },
+  "fc8bcbeac80b": {
+   "date": "2026-04-04",
+   "value": 3,
+   "memo": "최다 리뷰: Slot & Dungeons · 긍정 100%"
+  },
+  "9285e9f184ef": {
+   "date": "2026-04-05",
+   "value": 4,
+   "memo": "최다 리뷰: The Dream Office · 긍정 100%"
+  },
+  "1e40f43818f4": {
+   "date": "2026-04-06",
+   "value": 2,
+   "memo": "최다 리뷰: AI Learns To Drive · 긍정 100%"
+  },
+  "e965af5fd139": {
+   "date": "2026-04-07",
+   "value": 3,
+   "memo": "최다 리뷰: Provinces · 긍정 67%"
+  },
+  "5a5331057c89": {
+   "date": "2026-04-08",
+   "value": 1,
+   "memo": "최다 리뷰: AI Learns To Drive · 긍정 100%"
+  },
+  "81e01079bb19": {
+   "date": "2026-04-09",
+   "value": 2,
+   "memo": "최다 리뷰: Purrrifiers: Cleaning Chaos (Play for Free with Friend's Pass) · 긍정 50%"
+  },
+  "55ca77702115": {
+   "date": "2026-04-10",
+   "value": 5,
+   "memo": "최다 리뷰: GwenBlade Witcheresque · 긍정 80%"
+  },
+  "b7b407016480": {
+   "date": "2026-04-11",
+   "value": 4,
+   "memo": "최다 리뷰: GwenBlade Witcheresque · 긍정 100%"
+  },
+  "17dd774b04bb": {
+   "date": "2026-04-12",
+   "value": 3,
+   "memo": "최다 리뷰: GwenBlade Witcheresque · 긍정 67%"
+  },
+  "6d7aa63e6edc": {
+   "date": "2026-04-13",
+   "value": 4,
+   "memo": "최다 리뷰: GwenBlade Witcheresque · 긍정 100%"
+  },
+  "9aff49e5359f": {
+   "date": "2026-04-14",
+   "value": 10,
+   "memo": "최다 리뷰: 2nd EVE · 긍정 100%"
+  },
+  "bbb71a1263f1": {
+   "date": "2026-04-15",
+   "value": 8,
+   "memo": "최다 리뷰: 2nd EVE · 긍정 88%"
+  },
+  "dcc14d1fe70f": {
+   "date": "2026-04-16",
+   "value": 4,
+   "memo": "최다 리뷰: Little Sim World · 긍정 75%"
+  },
+  "ad2809cc0d79": {
+   "date": "2026-04-17",
+   "value": 2,
+   "memo": "최다 리뷰: Chemical Combat · 긍정 100%"
+  },
+  "de6b9e10428a": {
+   "date": "2026-04-18",
+   "value": 1,
+   "memo": "최다 리뷰: Little Sim World · 긍정 100%"
+  },
+  "442fc6ca9be4": {
+   "date": "2026-04-19",
+   "value": 8,
+   "memo": "최다 리뷰: OPEN FOR BUSINESS: Game & Movie Store Simulator · 긍정 50%"
+  },
+  "50cb09998800": {
+   "date": "2026-04-20",
+   "value": 4,
+   "memo": "최다 리뷰: OPEN FOR BUSINESS: Game & Movie Store Simulator · 긍정 100%"
+  },
+  "f6fc6ad57774": {
+   "date": "2026-04-21",
+   "value": 1,
+   "memo": "최다 리뷰: Little Sim World · 긍정 0%"
+  },
+  "4e1b1ce5213d": {
+   "date": "2026-04-22",
+   "value": 2,
+   "memo": "최다 리뷰: Gensei Suikoden Plus · 긍정 100%"
+  },
+  "bf10f4da1f85": {
+   "date": "2026-04-23",
+   "value": 2,
+   "memo": "최다 리뷰: FixForce · 긍정 100%"
+  },
+  "f01c57951289": {
+   "date": "2026-04-25",
+   "value": 1,
+   "memo": "최다 리뷰: FixForce · 긍정 100%"
+  },
+  "aced6a7f79cc": {
+   "date": "2026-04-26",
+   "value": 1,
+   "memo": "최다 리뷰: Gensei Suikoden Plus · 긍정 100%"
+  },
+  "77c8afa1b182": {
+   "date": "2026-04-28",
+   "value": 1,
+   "memo": "최다 리뷰: Little Sim World · 긍정 100%"
+  },
+  "1ec9c431a870": {
+   "date": "2026-04-29",
+   "value": 1,
+   "memo": "최다 리뷰: OPEN FOR BUSINESS: Game & Movie Store Simulator · 긍정 100%"
+  },
+  "eb95749cadd0": {
+   "date": "2026-04-30",
+   "value": 1,
+   "memo": "최다 리뷰: Little Sim World · 긍정 0%"
+  },
+  "10192b2ccaf1": {
+   "date": "2026-05-03",
+   "value": 2,
+   "memo": "최다 리뷰: Repterra · 긍정 100%"
+  },
+  "64d58b4d076e": {
+   "date": "2026-05-04",
+   "value": 6,
+   "memo": "최다 리뷰: Repterra · 긍정 100%"
+  },
+  "4b2fa7fe1458": {
+   "date": "2026-05-05",
+   "value": 3,
+   "memo": "최다 리뷰: Fire On Fight : Online Multiplayer Shooter · 긍정 100%"
+  },
+  "7842f10c7886": {
+   "date": "2026-05-06",
+   "value": 4,
+   "memo": "최다 리뷰: Repterra · 긍정 100%"
+  },
+  "f72b43fa81d1": {
+   "date": "2026-05-07",
+   "value": 2,
+   "memo": "최다 리뷰: SILENT BREATH · 긍정 100%"
+  },
+  "88d05f7c8007": {
+   "date": "2026-05-08",
+   "value": 8,
+   "memo": "최다 리뷰: Repterra · 긍정 100%"
+  },
+  "af1d26c6db2e": {
+   "date": "2026-05-09",
+   "value": 3,
+   "memo": "최다 리뷰: A Game of D.I.C.E. · 긍정 67%"
+  },
+  "149c82b15f91": {
+   "date": "2026-05-10",
+   "value": 8,
+   "memo": "최다 리뷰: Nightmare Frontier · 긍정 88%"
+  },
+  "2fb9e449471b": {
+   "date": "2026-05-12",
+   "value": 3,
+   "memo": "최다 리뷰: Little Sim World · 긍정 100%"
+  },
+  "b01ab17e1b2a": {
+   "date": "2026-05-13",
+   "value": 4,
+   "memo": "최다 리뷰: HELL GALAXY · 긍정 50%"
+  },
+  "44c0eb137cfd": {
+   "date": "2026-05-14",
+   "value": 2,
+   "memo": "최다 리뷰: Repterra · 긍정 50%"
+  },
+  "1809d7a53101": {
+   "date": "2026-05-15",
+   "value": 2,
+   "memo": "최다 리뷰: The Dream Office · 긍정 100%"
+  },
+  "e728940e5434": {
+   "date": "2026-05-16",
+   "value": 4,
+   "memo": "최다 리뷰: Repterra · 긍정 100%"
+  },
+  "3c2186388b5c": {
+   "date": "2026-05-17",
+   "value": 2,
+   "memo": "최다 리뷰: Gensei Suikoden Plus · 긍정 100%"
+  },
+  "25b43c8f2278": {
+   "date": "2026-05-18",
+   "value": 3,
+   "memo": "최다 리뷰: Rekindling · 긍정 67%"
+  },
+  "60349d6c3fe7": {
+   "date": "2026-05-20",
+   "value": 1,
+   "memo": "최다 리뷰: The Dream Office · 긍정 100%"
+  },
+  "a339a5a19ef1": {
+   "date": "2026-05-21",
+   "value": 1,
+   "memo": "최다 리뷰: Sker Ritual · 긍정 100%"
+  },
+  "b98fb795b419": {
+   "date": "2026-05-23",
+   "value": 1,
+   "memo": "최다 리뷰: Escape from Junglekov · 긍정 0%"
+  },
+  "d79f497b0d01": {
+   "date": "2026-05-25",
+   "value": 4,
+   "memo": "최다 리뷰: Sker Ritual · 긍정 75%"
+  },
+  "f63a2fba229d": {
+   "date": "2026-05-26",
+   "value": 4,
+   "memo": "최다 리뷰: Purrrifiers: Cleaning Chaos (Play for Free with Friend's Pass) · 긍정 75%"
+  },
+  "08cc39aa449a": {
+   "date": "2026-05-27",
+   "value": 3,
+   "memo": "최다 리뷰: Sker Ritual · 긍정 67%"
+  },
+  "5c0031c75e77": {
+   "date": "2026-05-28",
+   "value": 2,
+   "memo": "최다 리뷰: AI Learns To Drive · 긍정 100%"
+  },
+  "4d94174c1884": {
+   "date": "2026-05-29",
+   "value": 4,
+   "memo": "최다 리뷰: SILENT BREATH · 긍정 75%"
+  },
+  "1767d25b8164": {
+   "date": "2026-05-30",
+   "value": 5,
+   "memo": "최다 리뷰: Fire On Fight : Online Multiplayer Shooter · 긍정 100%"
+  },
+  "76e41aa72dd4": {
+   "date": "2026-05-31",
+   "value": 3,
+   "memo": "최다 리뷰: SILENT BREATH · 긍정 67%"
+  },
+  "2b03b351b8f2": {
+   "date": "2026-06-01",
+   "value": 4,
+   "memo": "최다 리뷰: Cyberpunk SFX · 긍정 100%"
+  },
+  "0764a1e82d14": {
+   "date": "2026-06-02",
+   "value": 3,
+   "memo": "최다 리뷰: Sker Ritual · 긍정 67%"
+  },
+  "01599a13cf69": {
+   "date": "2026-06-03",
+   "value": 6,
+   "memo": "최다 리뷰: Sker Ritual · 긍정 83%"
+  },
+  "fa6b11904100": {
+   "date": "2026-06-04",
+   "value": 3,
+   "memo": "최다 리뷰: Sker Ritual · 긍정 100%"
+  },
+  "4aa08047354d": {
+   "date": "2026-06-05",
+   "value": 2,
+   "memo": "최다 리뷰: Rekindling · 긍정 100%"
+  },
+  "ace41cdaed55": {
+   "date": "2026-06-07",
+   "value": 3,
+   "memo": "최다 리뷰: Rekindling · 긍정 100%"
+  },
+  "73d2da2e5475": {
+   "date": "2026-06-08",
+   "value": 3,
+   "memo": "최다 리뷰: Rekindling · 긍정 67%"
+  },
+  "4a85b5758fab": {
+   "date": "2026-06-09",
+   "value": 1,
+   "memo": "최다 리뷰: STAR OCEAN THE SECOND STORY R · 긍정 100%"
+  },
+  "8bb4c25d178f": {
+   "date": "2026-06-10",
+   "value": 5,
+   "memo": "최다 리뷰: STAR OCEAN THE SECOND STORY R · 긍정 80%"
+  },
+  "7d1289b343e2": {
+   "date": "2026-06-11",
+   "value": 1,
+   "memo": "최다 리뷰: STAR OCEAN THE SECOND STORY R · 긍정 100%"
+  },
+  "2d22d366975a": {
+   "date": "2026-06-12",
+   "value": 4,
+   "memo": "최다 리뷰: Brainrot Autobattler · 긍정 100%"
+  },
+  "f5abea26bad2": {
+   "date": "2026-06-13",
+   "value": 6,
+   "memo": "최다 리뷰: Repterra · 긍정 83%"
+  },
+  "25a7132354ed": {
+   "date": "2026-06-14",
+   "value": 1,
+   "memo": "최다 리뷰: STAR OCEAN THE SECOND STORY R · 긍정 100%"
+  },
+  "7feac6464efb": {
+   "date": "2026-06-15",
+   "value": 2,
+   "memo": "최다 리뷰: SILENT BREATH · 긍정 50%"
+  },
+  "794854378e1d": {
+   "date": "2026-06-16",
+   "value": 2,
+   "memo": "최다 리뷰: Legacy of Defense · 긍정 50%"
+  },
+  "38694d96255c": {
+   "date": "2026-06-17",
+   "value": 5,
+   "memo": "최다 리뷰: STAR OCEAN THE SECOND STORY R · 긍정 60%"
+  },
+  "06a6fa4c7d50": {
+   "date": "2026-06-18",
+   "value": 3,
+   "memo": "최다 리뷰: Dungreed · 긍정 100%"
+  },
+  "2d52977de34d": {
+   "date": "2026-06-19",
+   "value": 2,
+   "memo": "최다 리뷰: Little Sim World · 긍정 100%"
+  },
+  "136f80e788bc": {
+   "date": "2026-06-20",
+   "value": 5,
+   "memo": "최다 리뷰: TOOSIN : 투신 · 긍정 100%"
+  },
+  "279b6d2e88a5": {
+   "date": "2026-06-21",
+   "value": 3,
+   "memo": "최다 리뷰: Sker Ritual · 긍정 100%"
+  },
+  "fa597b1e02ea": {
+   "date": "2026-06-22",
+   "value": 7,
+   "memo": "최다 리뷰: Scales of Silence · 긍정 100%"
+  },
+  "7e9c385a1076": {
+   "date": "2026-06-23",
+   "value": 6,
+   "memo": "최다 리뷰: Scales of Silence · 긍정 83%"
+  },
+  "e882f313b3f9": {
+   "date": "2026-06-25",
+   "value": 6,
+   "memo": "최다 리뷰: STAR OCEAN THE SECOND STORY R · 긍정 33%"
+  },
+  "25595873da6d": {
+   "date": "2026-06-26",
+   "value": 7,
+   "memo": "최다 리뷰: Sker Ritual · 긍정 71%"
+  },
+  "07938d77001a": {
+   "date": "2026-06-27",
+   "value": 5,
+   "memo": "최다 리뷰: Lost Ruins · 긍정 80%"
+  },
+  "1deaf00beb97": {
+   "date": "2026-06-28",
+   "value": 9,
+   "memo": "최다 리뷰: Mahou Arms · 긍정 67%"
+  },
+  "9083676e7bbc": {
+   "date": "2026-06-29",
+   "value": 4,
+   "memo": "최다 리뷰: Dungreed · 긍정 100%"
+  },
+  "f7070e5d7581": {
+   "date": "2026-06-30",
+   "value": 7,
+   "memo": "최다 리뷰: Little Sim World · 긍정 86%"
+  },
+  "6c7892216e1a": {
+   "date": "2026-07-01",
+   "value": 3,
+   "memo": "최다 리뷰: HELL GALAXY · 긍정 67%"
+  },
+  "067110cfaa8e": {
+   "date": "2026-07-02",
+   "value": 7,
+   "memo": "최다 리뷰: Sker Ritual · 긍정 100%"
+  },
+  "5db46c34f76c": {
+   "date": "2026-07-03",
+   "value": 7,
+   "memo": "최다 리뷰: Little Sim World · 긍정 57%"
+  },
+  "c8f241b9a383": {
+   "date": "2026-07-04",
+   "value": 7,
+   "memo": "최다 리뷰: STAR OCEAN THE SECOND STORY R · 긍정 86%"
+  },
+  "0258e1b9f3b2": {
+   "date": "2026-07-05",
+   "value": 6,
+   "memo": "최다 리뷰: DRAGON QUEST III HD-2D Remake · 긍정 83%"
+  },
+  "612f3e78f46c": {
+   "date": "2026-07-06",
+   "value": 18,
+   "memo": "최다 리뷰: Invasion Protocol · 긍정 78%"
+  },
+  "7d0ffb47a092": {
+   "date": "2026-07-07",
+   "value": 8,
+   "memo": "최다 리뷰: DRAGON QUEST III HD-2D Remake · 긍정 100%"
+  },
+  "7ee1bb231079": {
+   "date": "2026-07-08",
+   "value": 7,
+   "memo": "최다 리뷰: DRAGON QUEST I & II HD-2D Remake · 긍정 71%"
+  },
+  "bd13d2091d2c": {
+   "date": "2026-07-09",
+   "value": 7,
+   "memo": "최다 리뷰: DRAGON QUEST I & II HD-2D Remake · 긍정 86%"
+  },
+  "d774c5d95f31": {
+   "date": "2026-07-10",
+   "value": 6,
+   "memo": "최다 리뷰: STAR OCEAN THE SECOND STORY R · 긍정 100%"
+  },
+  "f97cb63559e7": {
+   "date": "2026-07-11",
+   "value": 6,
+   "memo": "최다 리뷰: Weed Supermarket Simulator · 긍정 83%"
+  },
+  "820f7be78074": {
+   "date": "2026-07-12",
+   "value": 19,
+   "memo": "최다 리뷰: DRAGON QUEST III HD-2D Remake · 긍정 89%"
+  },
+  "72f86fd0c4fe": {
+   "date": "2026-07-13",
+   "value": 10,
+   "memo": "최다 리뷰: Dungreed · 긍정 90%"
+  },
+  "fa1e3d93d73e": {
+   "date": "2026-07-14",
+   "value": 5,
+   "memo": "최다 리뷰: DRAGON QUEST I & II HD-2D Remake · 긍정 80%"
+  },
+  "ded3088f4f89": {
+   "date": "2026-07-15",
+   "value": 8,
+   "memo": "최다 리뷰: OCTOPATH TRAVELER 0 · 긍정 100%"
+  },
+  "968e49cf27c5": {
+   "date": "2026-07-16",
+   "value": 16,
+   "memo": "최다 리뷰: Banker Simulator · 긍정 88%"
+  },
+  "146f73a1ceac": {
+   "date": "2026-07-17",
+   "value": 85,
+   "memo": "최다 리뷰: Subway Builder · 긍정 79%"
+  },
+  "822f12eab1df": {
+   "date": "2026-07-18",
+   "value": 234,
+   "memo": "최다 리뷰: Subway Builder · 긍정 85%"
+  },
+  "f5f83010618b": {
+   "date": "2026-07-19",
+   "value": 239,
+   "memo": "최다 리뷰: Database Detective: Minor Crimes Division · 긍정 81%"
+  },
+  "62202d92d9b0": {
+   "date": "2026-07-20",
+   "value": 243,
+   "memo": "최다 리뷰: Database Detective: Minor Crimes Division · 긍정 88%"
+  },
+  "ddde48733083": {
+   "date": "2026-07-21",
+   "value": 381,
+   "memo": "최다 리뷰: MOLDRISE · 긍정 84%"
+  },
+  "73a5e2ed8f5c": {
+   "date": "2026-07-22",
+   "value": 377,
+   "memo": "최다 리뷰: MOLDRISE · 긍정 85%"
+  },
+  "6b35de263d79": {
+   "date": "2026-07-23",
+   "value": 392,
+   "memo": "최다 리뷰: MOLDRISE · 긍정 85%"
+  },
+  "766c9506d805": {
+   "date": "2026-07-24",
+   "value": 476,
+   "memo": "최다 리뷰: Tears of Metal · 긍정 89%"
+  },
+  "d335cc4756e6": {
+   "date": "2026-07-25",
+   "value": 575,
+   "memo": "최다 리뷰: Tears of Metal · 긍정 87%"
+  },
+  "4b885556be52": {
+   "date": "2026-07-26",
+   "value": 522,
+   "memo": "최다 리뷰: Dinoblade · 긍정 84%"
+  },
+  "c3fd1fec8a9b": {
+   "date": "2026-07-27",
+   "value": 523,
+   "memo": "최다 리뷰: Dinoblade · 긍정 85%"
+  },
+  "9e9b92ad7948": {
+   "date": "2026-07-28",
+   "value": 569,
+   "memo": "최다 리뷰: Tears of Metal · 긍정 83%"
+  },
+  "dff73fc2079b": {
+   "date": "2026-07-29",
+   "value": 652,
+   "memo": "최다 리뷰: Dinoblade · 긍정 88%"
+  },
+  "ca9554724047": {
+   "date": "2026-07-30",
+   "value": 676,
+   "memo": "최다 리뷰: Tears of Metal · 긍정 87%"
+  },
+  "9b0e86425b97": {
+   "date": "2026-07-31",
+   "value": 853,
+   "memo": "최다 리뷰: Dinoblade · 긍정 85%"
+  },
+  "4eeac6097cbc": {
+   "date": "2026-08-01",
+   "value": 864,
+   "memo": "최다 리뷰: Tears of Metal · 긍정 87%"
+  },
+  "cf166bfb0a91": {
+   "date": "2026-08-02",
+   "value": 865,
+   "memo": "최다 리뷰: Dinoblade · 긍정 87%"
+  },
+  "e88e9bf10a5e": {
+   "date": "2026-08-03",
+   "value": 797,
+   "memo": "최다 리뷰: How Many Dudes? · 긍정 87%"
+  },
+  "94b5bde6a8e2": {
+   "date": "2026-08-04",
+   "value": 600,
+   "memo": "최다 리뷰: Beast of Reincarnation · 긍정 86%"
+  },
+  "10c0011f7e2c": {
+   "date": "2026-08-05",
+   "value": 626,
+   "memo": "최다 리뷰: Rent Due · 긍정 85%"
+  },
+  "5c40e992055b": {
+   "date": "2026-08-06",
+   "value": 916,
+   "memo": "최다 리뷰: How Many Dudes? · 긍정 87%"
+  },
+  "249a9e1ef16e": {
+   "date": "2026-08-07",
+   "value": 1426,
+   "memo": "최다 리뷰: Fields of Mistria · 긍정 88%"
+  },
+  "1a9e2dd6113a": {
+   "date": "2026-08-08",
+   "value": 1539,
+   "memo": "최다 리뷰: Big Walk · 긍정 88%"
+  },
+  "688d110fcd5b": {
+   "date": "2026-08-09",
+   "value": 1428,
+   "memo": "최다 리뷰: Endacopia · 긍정 89%"
+  },
+  "75fbcfc4a13d": {
+   "date": "2026-08-10",
+   "value": 1498,
+   "memo": "최다 리뷰: GRAIN ROT · 긍정 89%"
+  },
+  "18b3a0d6a433": {
+   "date": "2026-08-11",
+   "value": 1401,
+   "memo": "최다 리뷰: Endacopia · 긍정 88%"
+  },
+  "3ad03440c4fc": {
+   "date": "2026-08-12",
+   "value": 1502,
+   "memo": "최다 리뷰: Luminary · 긍정 88%"
+  },
+  "7775746500ce": {
+   "date": "2026-08-13",
+   "value": 1741,
+   "memo": "최다 리뷰: Endacopia · 긍정 87%"
+  },
+  "858adfa0dd38": {
+   "date": "2026-08-14",
+   "value": 1867,
+   "memo": "최다 리뷰: IRON NEST: Heavy Turret Simulator · 긍정 87%"
+  },
+  "aaad515fa818": {
+   "date": "2026-08-15",
+   "value": 1816,
+   "memo": "최다 리뷰: Endacopia · 긍정 86%"
+  },
+  "7bb0ba6f4bb5": {
+   "date": "2026-08-16",
+   "value": 1824,
+   "memo": "최다 리뷰: Fields of Mistria · 긍정 86%"
+  },
+  "a63eb21fa866": {
+   "date": "2026-08-17",
+   "value": 1741,
+   "memo": "최다 리뷰: Endacopia · 긍정 87%"
+  },
+  "ec9de7b616f8": {
+   "date": "2026-08-18",
+   "value": 1671,
+   "memo": "최다 리뷰: No More Room in Hell 2 · 긍정 86%"
+  },
+  "0d54942fbaae": {
+   "date": "2026-08-19",
+   "value": 1582,
+   "memo": "최다 리뷰: No More Room in Hell 2 · 긍정 87%"
+  },
+  "270d70f72512": {
+   "date": "2026-08-20",
+   "value": 1792,
+   "memo": "최다 리뷰: Twisted Tower · 긍정 88%"
+  },
+  "c49282085ac5": {
+   "date": "2026-08-21",
+   "value": 1929,
+   "memo": "최다 리뷰: Twisted Tower · 긍정 87%"
+  },
+  "3e7732a3de16": {
+   "date": "2026-08-22",
+   "value": 2088,
+   "memo": "최다 리뷰: Brigador Killers · 긍정 85%"
+  },
+  "730a2a838f98": {
+   "date": "2026-08-23",
+   "value": 1971,
+   "memo": "최다 리뷰: Twisted Tower · 긍정 84%"
+  },
+  "2edf71711d1d": {
+   "date": "2026-08-24",
+   "value": 1835,
+   "memo": "최다 리뷰: No More Room in Hell 2 · 긍정 86%"
+  },
+  "99688a759a99": {
+   "date": "2026-08-25",
+   "value": 1896,
+   "memo": "최다 리뷰: Twisted Tower · 긍정 88%"
+  },
+  "b6a22c28ca62": {
+   "date": "2026-08-26",
+   "value": 1236,
+   "memo": "최다 리뷰: Big Walk · 긍정 87%"
+  },
+  "98011f96e993": {
+   "date": "2026-08-27",
+   "value": 36,
+   "memo": "최다 리뷰: Brigador Killers · 긍정 86%"
+  }
+ },
+ "conversations": {}
+}
