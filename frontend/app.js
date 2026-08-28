@@ -105,6 +105,69 @@ function drawChart(canvas, pts, maWindow = 7) {
 
 $("#export-csv").onclick = () => { location.href = API + "/api/data/export.csv"; };
 
+// ---------- 분석 리포트 (같은 페이지 렌더링 + md 다운로드) ----------
+$("#report-dl").onclick = () => { location.href = API + "/api/report.md"; };
+$("#report-toggle").onclick = async () => {
+  const body = $("#report-body"), btn = $("#report-toggle");
+  if (!body.hidden) { body.hidden = true; btn.textContent = "리포트 펼치기"; return; }
+  if (!body.innerHTML) {
+    const res = await fetch(API + "/api/report");
+    if (!res.ok) { body.textContent = "리포트를 불러오지 못했습니다."; }
+    else body.innerHTML = mdToHtml(await res.text());
+  }
+  body.hidden = false; btn.textContent = "리포트 접기";
+};
+
+// 최소 마크다운 렌더러 (외부 라이브러리 금지 조건에 맞춘 자체 구현).
+// 이 리포트가 쓰는 문법만 다룬다: 제목/굵게/인라인코드/이미지/링크/목록/코드블록/표.
+function mdToHtml(md) {
+  const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const inline = (s) =>
+    esc(s)
+      .replace(/`([^`]+)`/g, "<code>$1</code>")
+      .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, '<img alt="$1" src="$2">')
+      .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  const out = [];
+  const lines = md.split("\n");
+  let list = null, para = [], codeBlock = null;
+  const flush = () => {
+    if (para.length) { out.push("<p>" + inline(para.join(" ")) + "</p>"); para = []; }
+    if (list) { out.push(`</${list}>`); list = null; }
+  };
+  for (const raw of lines) {
+    if (codeBlock !== null) {
+      if (raw.startsWith("```")) { out.push("<pre>" + esc(codeBlock) + "</pre>"); codeBlock = null; }
+      else codeBlock += raw + "\n";
+      continue;
+    }
+    const line = raw.trimEnd();
+    if (line.startsWith("```")) { flush(); codeBlock = ""; continue; }
+    const h = line.match(/^(#{1,4}) +(.*)/);
+    if (h) { flush(); out.push(`<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`); continue; }
+    if (line.startsWith("|")) {
+      flush();
+      if (/^\|[\s\-|:]+\|$/.test(line)) continue; // 구분선 행
+      const cells = line.slice(1, -1).split("|").map((c) => inline(c.trim()));
+      out.push("<p>" + cells.join(" · ") + "</p>");
+      continue;
+    }
+    const li = line.match(/^\s*(?:[-*]|\d+\.) +(.*)/);
+    if (li) {
+      if (para.length) flush();
+      const kind = /^\s*\d+\./.test(line) ? "ol" : "ul";
+      if (list !== kind) { if (list) out.push(`</${list}>`); out.push(`<${kind}>`); list = kind; }
+      out.push("<li>" + inline(li[1]) + "</li>");
+      continue;
+    }
+    if (line === "") { flush(); continue; }
+    if (list) { out[out.length - 1] = out[out.length - 1].replace(/<\/li>$/, " " + inline(line) + "</li>"); continue; }
+    para.push(line);
+  }
+  flush();
+  return out.join("\n");
+}
+
 // ---------- 채팅 ----------
 function addMsg(role, text, cls = "") {
   const div = document.createElement("div");
@@ -140,6 +203,12 @@ $("#chat-form").onsubmit = async (e) => {
   } finally {
     input.disabled = btn.disabled = false; input.focus();
   }
+};
+
+$("#chat-new").onclick = () => {
+  conversationId = null; history = [];
+  $("#chat-log").innerHTML = "";
+  $("#chat-status").textContent = "새 대화를 시작했습니다. 이전 대화는 기록에 저장돼 있습니다.";
 };
 
 // ---------- 대화 기록 ----------

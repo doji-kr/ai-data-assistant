@@ -50,6 +50,8 @@
 | GET | `/api/conversations` | 대화 목록 (messages 미포함, `message_count` 만) |
 | GET | `/api/conversations/{id}` | 특정 대화 전체 messages 조회 (불러오기) |
 | DELETE | `/api/conversations/{id}` | 대화 삭제 |
+| GET | `/api/report` | 분석 리포트 원문(Markdown) — 프론트가 같은 페이지에서 렌더링 |
+| GET | `/api/report.md` | 리포트 md 파일 다운로드 |
 | GET | `/api/health` | 상태 (저장소 종류·LLM 설정 여부) |
 
 ## 챗 동작 흐름 (컨텍스트 주입 + 도구 호출)

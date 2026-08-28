@@ -42,6 +42,13 @@ button.ghost { background: transparent; color: var(--muted); border: 1px solid v
 .stat span { color: var(--muted); font-size: 12px; }
 canvas { width: 100%; height: auto; margin-top: 12px; }
 .ctl-group { display: inline-flex; gap: 4px; }
+.report { margin-top: 12px; font-size: 14px; line-height: 1.7; }
+.report img { max-width: 100%; border: 1px solid var(--border); border-radius: 8px; margin: 6px 0; }
+.report h1 { font-size: 19px; } .report h2 { font-size: 16px; margin: 18px 0 8px; }
+.report h3 { font-size: 14.5px; margin: 14px 0 6px; }
+.report code { background: var(--bot); padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+.report pre { background: var(--bot); padding: 10px 12px; border-radius: 8px; overflow-x: auto; }
+.report ul, .report ol { padding-left: 22px; }
 .ctl-group button.active { background: var(--accent); color: #fff; border-color: transparent; }
 .table-wrap { max-height: 300px; overflow-y: auto; margin-top: 10px; }
 table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }

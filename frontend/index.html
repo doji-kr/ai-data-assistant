@@ -37,12 +37,22 @@
     </div>
   </section>
 
+  <section class="card">
+    <h2>분석 리포트</h2>
+    <div class="row">
+      <button id="report-toggle" class="ghost">리포트 펼치기</button>
+      <button id="report-dl">REPORT.md 다운로드</button>
+    </div>
+    <article id="report-body" class="report" hidden></article>
+  </section>
+
   <section class="card" id="chat-card">
     <h2>AI 채팅</h2>
     <div id="chat-log" aria-live="polite"></div>
     <form id="chat-form" class="row">
       <input id="chat-input" placeholder="예: 최근 리뷰 추세가 어때?" autocomplete="off" required>
       <button type="submit" id="chat-send">보내기</button>
+      <button type="button" id="chat-new" class="ghost" title="지금 대화는 이미 저장돼 있음 — 새 대화를 시작">새 대화</button>
     </form>
     <div id="chat-status"></div>
   </section>
