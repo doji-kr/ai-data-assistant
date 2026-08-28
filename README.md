@@ -13,7 +13,8 @@
 
 - **백엔드**: FastAPI + Pydantic (라우터/서비스 분리, 요청 검증) · Swagger `/docs`
 - **DB**: Firebase Firestore (`data`, `conversations` 컬렉션) — 키가 없으면 로컬 JSON 저장소로 자동 폴백
-- **AI**: GPT API (OpenAI 호환 — Codyssey 게이트웨이 지원, Function Calling 1종 포함)
+- **AI**: GPT API (OpenAI 호환 — Codyssey·Vercel AI Gateway 등 `OPENAI_BASE_URL` 로 게이트웨이
+  교체 가능, Function Calling 1종 포함)
 - **프론트엔드**: 바닐라 HTML/CSS/JS (채팅 + 로딩 표시 · CRUD · 대화 기록 불러오기 · 요약 카드 ·
   캔버스 차트(원계열+7일 이동평균) · CSV 내보내기 · 다크 모드)
 - **컨테이너**: Dockerfile + docker-compose (NAS 데모 배포)
@@ -229,19 +230,25 @@ docker compose up -d --build
 
 ## 제출 스크린샷
 
-> ⚠️ 아래 4장은 배포 URL 을 열어 캡처한 뒤 `images/screenshots/` 에 **아래 파일명 그대로**
-> 저장하고 커밋하면 자동으로 표시된다 (푸시 = Render 재배포).
-> ① https://ai-data-assistant-3srn.onrender.com/docs 화면 → `swagger.png`
-> ② 데이터 관리에서 한 건 추가 직후(목록 갱신이 보이게) → `crud.png`
-> ③ 요약 카드 + 질문/답변이 보이는 채팅 → `chat.png`
-> ④ 대화 기록에서 이전 대화를 불러온 화면 → `conversations.png`
-> ⑤ (모바일 대응 증빙) 폰에서 채팅·데이터 추가·불러오기 중 한 장면 → `mobile.png`
+**① Swagger UI** — 배포 백엔드의 `/docs`. data(CRUD·요약·CSV)와 conversations(저장·조회·삭제)
+라우터가 태그로 분리되어 있다.
 
 ![Swagger UI](images/screenshots/swagger.png)
+
+**② 데이터 관리(CRUD)** — 한 건 추가 직후 목록이 갱신된 화면. 각 행에 수정·삭제 버튼.
+
 ![데이터 추가 후 목록 갱신](images/screenshots/crud.png)
-![요약이 보이는 채팅 화면](images/screenshots/chat.png)
-![대화 불러오기](images/screenshots/conversations.png)
-![모바일 화면](images/screenshots/mobile.png)
+
+**③ AI 채팅 + 대화 불러오기** — "최근 리뷰 어때?"에 요약이 주입된 답(7일 이동평균·추세·최고점·
+최다 리뷰 게임)을 **내 데이터의 수치로** 반환. 하단 "불러온 대화" 표시는 대화 기록에서 이전
+대화를 복원해 이어가는 상태다.
+
+![요약이 주입된 채팅과 불러온 대화](images/screenshots/chat.png)
+
+**④ AI 게이트웨이 키 콘솔** — OpenAI 호환 게이트웨이(Vercel AI Gateway)의 API 키와
+사용 이력(Used 5 minutes ago). 챗 기능이 실제 키로 호출되고 있음을 보여준다.
+
+![AI 게이트웨이 API 키 사용 이력](images/screenshots/ai-gateway.png)
 
 ## 과제 목표 답변 — 스스로 설명할 수 있어야 하는 것들
 
